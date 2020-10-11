@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audio_cache.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -70,4 +71,7 @@ void main() {
   )));
 }
 
-void playNote(int i) {}
+void playNote(int noteNumber) {
+  final player = AudioCache();
+  player.play('$noteNumber.wav');
+}
