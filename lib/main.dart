@@ -2,76 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 void main() {
-  runApp(MaterialApp(
-      home: Scaffold(
-    backgroundColor: Colors.black,
-    body: SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              color: Colors.deepPurple,
-              onPressed: () {
-                playNote(1);
-              },
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              color: Colors.indigo,
-              onPressed: () {
-                playNote(2);
-              },
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              color: Colors.blue,
-              onPressed: () {
-                playNote(3);
-              },
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              color: Colors.green,
-              onPressed: () {
-                playNote(4);
-              },
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              color: Colors.yellow,
-              onPressed: () {
-                playNote(5);
-              },
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              color: Colors.orange,
-              onPressed: () {
-                playNote(6);
-              },
-            ),
-          ),
-          Expanded(
-            child: FlatButton(
-              color: Colors.red,
-              onPressed: () {
-                playNote(7);
-              },
-            ),
-          ),
-        ],
-      ),
-    ),
-  )));
+  runApp(Xylophone());
 }
 
-void playNote(int noteNumber) {
-  final player = AudioCache();
-  player.play('$noteNumber.wav');
+class Xylophone extends StatelessWidget {
+  // Play Notes
+  void playNote(int noteNumber) {
+    final player = AudioCache();
+    player.play('$noteNumber.wav');
+  }
+
+  // Create Keys
+  Expanded buildKey(Color color, int noteNumber) {
+    return Expanded(
+      child: FlatButton(
+        color: color,
+        onPressed: () {
+          playNote(noteNumber);
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            buildKey(Colors.red, 1),
+            buildKey(Colors.orange, 2),
+            buildKey(Colors.yellow, 3),
+            buildKey(Colors.green, 4),
+            buildKey(Colors.blue, 5),
+            buildKey(Colors.indigo, 6),
+            buildKey(Colors.deepPurple, 7),
+          ],
+        ),
+      ),
+    ));
+  }
 }
