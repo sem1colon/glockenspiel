@@ -1,5 +1,5 @@
-#Xylophone
+# Xylophone
 Made with Flutter, Supports Andriod, iOS & Web platforms.
 
-##Features
+## Features
 Xylophone is a fun musical instrument anyone can play!
