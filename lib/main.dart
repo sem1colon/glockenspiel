@@ -1,18 +1,35 @@
-import 'package:audioplayers/audio_cache.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(Xylophone());
 }
 
-class Xylophone extends StatelessWidget {
-  // Play Notes
-  void playNote(int noteNumber) {
-    final player = AudioCache();
-    player.play('$noteNumber.wav');
+class Xylophone extends StatefulWidget {
+  @override
+  _XylophoneState createState() => _XylophoneState();
+}
+
+class _XylophoneState extends State<Xylophone> {
+  late AudioPlayer audioPlayer;
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = AudioPlayer();
   }
 
-  // Create Keys
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
+  void playNote(int noteNumber) async {
+    await audioPlayer.setAsset('assets/' + noteNumber.toString() + '.wav');
+    audioPlayer.play();
+  }
+
   Expanded buildKey(Color color, int noteNumber) {
     return Expanded(
       child: FlatButton(
@@ -20,7 +37,7 @@ class Xylophone extends StatelessWidget {
         onPressed: () {
           playNote(noteNumber);
         },
-        child: null,
+        child: SizedBox.shrink(),
       ),
     );
   }
