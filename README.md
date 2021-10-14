@@ -1,4 +1,4 @@
-# Xylophone
+# Glockenspiel
 Made with Flutter, Supports Andriod, iOS & Web platforms.
 
 ## Features
